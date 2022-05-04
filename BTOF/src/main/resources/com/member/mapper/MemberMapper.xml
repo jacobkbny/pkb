@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.member.mapper.MemberMapper">
+
+	<insert id="addMember" >
+		insert into users(user_id, user_pwd, user_tel, user_nick , user_bir1, user_bir2, user_bir3, user_gend , user_rec, user_inter) 
+		values(#{user_id}, #{user_pwd}, #{user_tel}, #{user_nick}, #{birth}, #{age})
+		<!-- 생년월일정보에서 생년월추출 수정 -->
+	</insert>
+		<insert id="addAuth">
+		insert into user_auth values(#{id}, #{auth})
+	</insert>
+
+	<!-- MemberVO안에 List<AuthVO> authList때문에 resultMap 정의함  -->
+	<resultMap type="com.member.domain.MemberVO" id="memberMap">
+		<id property="user_id" column="user_id" />
+		<result property="user_id" column="user_id"/>
+		<result property="pw" column="pw"/>
+		<result property="name" column="name"/>
+		<result property="email" column="email"/>
+		<result property="gender" column="gender"/>
+		<result property="age" column="age"/>
+		<result property="reg" column="reg"/>
+		<result property="updateDate" column="updatedate"/>
+		<result property="enabled" column="enabled"/>
+		<collection property="authList" resultMap="authMap"></collection>
+	</resultMap>
+	<resultMap type="com.member.domain.AuthVO" id="authMap">
+		<result property="id" column="id" />
+		<result property="auth" column="auth" />
+	</resultMap>
+	
+	<select id="getMember" resultMap="memberMap">
+		select mem.id, pw, name, email, gender, age, reg, updatedate, auth 
+		from memberSec mem left outer join memberSec_auth auth on mem.id = auth.id 
+		where mem.id = #{id} 
+	</select>
+		
+	
+	
+	<select id="checkOwner" resultType="String">
+	
+	<!--  상품 고유번호를 주고 소유자를 가져오는 쿼리문 실행 -->
+	select prod_dtl_own from product_dtl where prod_num=#{prod_num}
+	</select>
+	<select id="checkAccount" resultType="int">
+	select count(*) from Hbank where acowner=#{Owner} and ac_num=#{ac_num}
+	</select>
+	<select id="checkPw" resultType="int">
+	select count(*) from users from pw =#{pwch}
+	</select>	
+	<insert id="InsPref">
+	insert into user_pref(id,music,video,art,photo,sports,ballet,fashion,animal,nature,game,vr,science,trip,reli,craft,achi)
+	values(#{id},#{music},#{video},#{art},#{photo},#{sports},#{ballet},#{fashion},#{animal},#{nature},#{game},#{vr},#{science},#{trip},#{reli},#{craft},#{achi}) 
+	
+	</insert>
+	
+	<insert id="insProduct">
+		insert into product(prod_no,prod_name,prod_div,prod_descr,prod_tag,prod_file,prod_artist) values(
+				PROD_NO_SEQ.nextval,#{prod_name},#{pieces},#{content},#{cate},#{file},#{id}	
+		)
+	</insert>
+	
+		<insert id="insUUID">
+			insert into test_dtl2 (prod_dtl_no,prod_dtl_name,prod_dtl_artist,prod_dtl_uuid,prod_dtl_price,prod_dtl_registday,prod_dtl_owner)
+			values(dtl_seq.nextval,#{prod_name},#{artist},#{uuid},#{price},sysdate,#{artist})
+		</insert>
+		
+		<select id="getNick" resultType="String">
+			select nick from users where id=#{id}
+		</select>
+		
+		<insert id="insArtist">
+		
+			insert into artist(artist_name,artist_nick,artist_id,artist_url,artist_introd) values(#{artist_name},#{artist_nick},#{artist_id},#{artist_url},#{artist_introd})
+		
+		</insert>
+		<select id="getArtist" resultType="String">
+			 select artist_name from artist a inner join users b on a.artist_nick =b.nick where id=#{id}
+		</select>
+		
+		<insert id="insProd">
+			 insert into product(prod_no,prod_name,prod_div,prod_descr,prod_tag,prod_file,prod_artist,prod_price)
+        values(prod_num.nextval,#{prod_name},#{prod_div},#{prod_descr},#{prod_tag},#{prod_file},#{prod_artist},#{prod_price}) 
+		</insert>
+	
+		<select id="getOwnPro" resultType="SellStatusVO">
+			select * from test_dtl2 where prod_dtl_owner=#{id}
+		</select>
+		
+		<select id="getProd_no" resultType="int">
+		
+			select prod_no from product where prod_name=#{prod_name} and prod_artist=#{artist}
+		</select>
+		<select id="getArtnick" resultType="int">
+		
+			select count(*) from artist where artist_nick=#{nickVal}
+		</select>
+	
+</mapper>
