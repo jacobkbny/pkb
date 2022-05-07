@@ -93,10 +93,7 @@
 								</video>
 								<br />
 								${product.prod_name} ${product.prod_no}
-								<a href="../admin/ready?prod_no=${product.prod_no}">승인신청</a>
-							
-							
-							
+								<a href="../admin/ready?prod_no=${product.prod_no}">승인신청</a>	
 						</c:when>
 						
 						<c:otherwise>
@@ -121,6 +118,15 @@
 		</c:forEach>
 	</table>
 	<br />
+	
+	<hr/>
+ 			<h3> 작가 등록 신청 </h3>
+ 			
+ 			
+	
+	
+	
+	
 </body>
 <script>
 		function openNickAvail2(){

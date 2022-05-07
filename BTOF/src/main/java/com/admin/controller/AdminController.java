@@ -22,7 +22,9 @@ import com.admin.domain.ProductVO;
 import com.admin.service.AdminService;
 import com.board.domain.InquiryVO;
 import com.member.controller.MemberController;
-
+import com.member.domain.ArtistVO;
+import com.member.domain.MemberVO;
+import com.member.service.MemberService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -33,21 +35,27 @@ public class AdminController {
 	
 	@Autowired
 	private AdminService adminService;
-
+	@Autowired
+	private MemberService memberService;
 	
 	@GetMapping("main")
-	public void main(Integer inq_result,Model model) {
-		model.addAttribute("inq_result",inq_result);
+	public void main( HttpSession session, Integer inq_result,Model model) {
+				String id = (String)session.getAttribute("memId");
+				MemberVO member = memberService.getMemberInfoForMypage(id);
+				System.out.println("관리자 로그인 입니다"+member.getPower());
+				model.addAttribute("member",member);
+				model.addAttribute("inq_result",inq_result);
 	}
 	
 	
 	
 	@GetMapping("Approval")
 	public void Approval(HttpServletRequest request, Criteria cri, Model model) {
-		model.addAttribute("list", adminService.getList(cri));   
-
+		model.addAttribute("list", adminService.getList(cri));
+			
+		List<ArtistVO> artist_list = adminService.getArtistInfo();
+			System.out.println("아티스트 패스가 F인 아티스트 리스트 입니다"+artist_list);
 	}
-	
 	@GetMapping("ready")
 	public void ready(@RequestParam("prod_no") int prod_no, @ModelAttribute("cri")Criteria cri, Model model,HttpSession session) {
 		

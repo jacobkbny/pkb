@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.board.domain.InquiryVO;
 import com.board.service.BoardService;
 import com.common.service.CommonService;
+import com.member.domain.MemberVO;
 
 import oracle.jdbc.proxy.annotation.Post;
 
@@ -21,7 +22,11 @@ public class BoardController {
 		@Autowired
 	private BoardService boardService;
 	@GetMapping("notice")
-	public void notice() {
+	public void notice(HttpSession session,Model model) {
+		String id =(String)session.getAttribute("memId");	
+			MemberVO member = boardService.getUserInfo(id);
+				System.out.println("member 입니다"+member);
+			model.addAttribute("member",member);
 		System.out.println("공지사항 폼 요청!");
 		
 	}
@@ -36,11 +41,8 @@ public class BoardController {
 	public void inquiryPro(InquiryVO vo, Model model,HttpSession session) {
 		
 		String id = (String)session.getAttribute("memId");
-				
 				vo.setId(id);
-				
 		int result = boardService.addInq(vo);
-		
 		model.addAttribute("result",result);
 		
 			

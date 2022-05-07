@@ -10,6 +10,7 @@ import com.admin.domain.Criteria;
 import com.admin.domain.ProductVO;
 import com.admin.mapper.AdminMapper;
 import com.board.domain.InquiryVO;
+import com.member.domain.ArtistVO;
 import com.member.mapper.MemberMapper;
 
 
@@ -106,5 +107,11 @@ public class AdminServiceImpl implements AdminService {
 				return result;	
 	
 	
+	}
+
+	@Override
+	public List<ArtistVO> getArtistInfo() {
+		List<ArtistVO> artist_list = adminMapper.getArtistInfo();  
+		return artist_list;
 	}
 }

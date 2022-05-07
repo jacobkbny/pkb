@@ -30,7 +30,7 @@
 
 
 
-</style>
+
 </head>
 <body>	
 	
@@ -41,8 +41,8 @@
 			history.go(-1);
 		</script>
 	</c:if>
-		<c:if test="${login_res != 0}">
-<header class="p-3 mb-3 border-bottom">
+		
+	<header class="p-3 mb-3 border-bottom">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
@@ -62,8 +62,8 @@
         
 
         <div class="text-end">
-        	<c:if test="${stat eq '1'}">
-        		<form action="/common/logout" method="post">
+        	<c:if test="${sessionScope.memId != null}">
+        		<form action="/member/logout" method="post">
         			<input type="submit" class="btn btn-light" value="로그아웃" />
         		</form>
         	<div align="right" display="inline">
@@ -72,7 +72,7 @@
        			<button onclick="window.location='/member/cashIn'">balance</button>
         	</div>
         	</c:if>
-        	<c:if test="${stat eq '0'}">
+        	<c:if test="${sessionScope.memId == null}">
         		<button type="button" class="btn btn-light" onclick="window.location='/common/login'">로그인</button>
             <button type="button" class="btn btn-light" onclick="window.location='/common/signup'">회원가입</button>
         	</c:if>
@@ -88,7 +88,7 @@
 			 items : 컨트롤러로부터 전달받은 List<BoardVO> 리스트 
 					리스트의 요소 개수만큼 자동으로 반복하며, 하나씩 꺼내서 board변수에 체워줌 
 		<c:forEach var="board" items="${list}"> --%>
-<table>
+
 
 
 
@@ -157,15 +157,6 @@
 			</div>
 		</div> <!-- class="footer" -->	
 
-
-
-
-
-
-
-
-
-		</c:if>
 <script type= "text/javascript">
 
 </script>

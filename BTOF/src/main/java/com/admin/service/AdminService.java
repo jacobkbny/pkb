@@ -5,6 +5,7 @@ import java.util.List;
 import com.admin.domain.Criteria;
 import com.admin.domain.ProductVO;
 import com.board.domain.InquiryVO;
+import com.member.domain.ArtistVO;
 
 
 
@@ -35,6 +36,8 @@ public interface AdminService {
 	public ProductVO bringPro(ProductVO product);
 
 	public int createUUID(String prod_dtl_name, String prod_dtl_artist, long price, int pieces);
+
+	public List<ArtistVO> getArtistInfo();
 
 	
 

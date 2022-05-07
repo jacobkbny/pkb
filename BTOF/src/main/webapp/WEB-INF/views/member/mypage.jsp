@@ -39,17 +39,20 @@
 			<ul>
 				<li><a class="admin_list_01" href="/member/mypage">마이
 						페이지</a></li>
-				<li><a class="admin_list_02" href="/member/collection?prod_dtl_own=${nick}">마이 NFT</a>
+				<li><a class="admin_list_02" href="/member/collection?prod_dtl_own=${vo.nick}">마이 NFT</a>
 				</li>
-				<lI><a class="admin_list_03" href="/member/cashIn">계좌
-						등록</a></lI>
+					<c:if test="${vo.bank_account =='F'}">
+						<lI><a class="admin_list_03" href="/member/enroll_ba">계좌등록</a></lI>
+					</c:if>
 				<lI><a class="admin_list_04" href="/member/withdrawal">회원 탈퇴</a></lI>
-				<li><a class="admin_list_05" href="/member/cashIn">충전</a></li>
+					<c:if test="${vo.bank_account =='T'}">
+				<li><a class="admin_list_05" href="/member/cashIn">Balance 충전</a></li>
+					</c:if>
 			</ul>
 		</div>
 	</div>
 
-
+			
 	<!-- 프로필 이미지-->
 	<table border="0" class="tbl_model">
 		<div class="container col-2">
@@ -77,7 +80,7 @@
 				<!--  <input type="text" value="${member.id}"/> -->
 				</br>
 				<label>passsword</label>
-				<input type="text" value="${member.pw}"/><button onclick="window.location='/member/pwch'">변경</button>
+				<input type="password" value="${member.pw}" disabled/><button onclick="window.location='/member/pwch'">변경</button>
 				</br>
 				<label>휴대전화번호</label>
 				<input type="text" value="${member.tell}"/><button onclick="window.location='/member/tellch'">변경</button>
@@ -86,11 +89,11 @@
 				<input type="text" value="${member.nick}"/><button onclick="window.location='/member/nickch'">변경</button>
 				</br>
 				<label>정산계좌</label>
-				<input type="text" value=""/><button onclick="window.location='/member/nickch'">등록</button>
+				<input type="text" value=""/><button onclick="window.location='/member/enroll_ba'">등록</button>
 				
 				<br/><br/><br/>
 				<div style=" text-align: center;">
-					<button style=" display: inline-block;" onclick="window.location='/common/market'">
+					<button style=" display: inline-block;" onclick="window.location='/product/sell_list'">
 					Marketplace</button>
 				</c:forEach>
 				</div>

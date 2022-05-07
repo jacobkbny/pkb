@@ -21,7 +21,9 @@
 			select * from product where prod_pass = 'F'
 	    ]]>
 	</select>
-	
+		<select id="getArtistInfo" resultType="ArtistVO">
+		select * from artist where artist_pass = 'F'
+		</select>
 	<select id="read" resultType="AproductVO">
 		 select * from product where prod_no=#{prod_no}
 	</select>
@@ -37,9 +39,7 @@
   	</update>
   	
   	<select id="bringPro" resultType="AproductVO">
-  	
   		select prod_name,prod_artist,prod_price,prod_div from product where prod_no=#{prod_no}
-  	
   	</select>
   	
   		

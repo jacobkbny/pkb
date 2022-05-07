@@ -15,22 +15,32 @@
 	</settings>
 
 	<!-- mapper.xml에서 resultType에 작성하는 vo같은 클래스 이름이 길다.
-		별칭달아서 짧게 써보자 
-	 -->
+		별칭달아서 짧게 써보자 --> 
+	
 	<typeAliases>
-<!-- 
-		<typeAlias type="com.board.domain.BoardVO" alias="boardVO"/>
-		<typeAlias type="com.board.domain.ReplyVO" alias="replyVO"/>
-		<typeAlias type="com.board.domain.ReplyVO2" alias="replyVO2"/>
--->
+		<typeAlias type="com.product.domain.LikeDTO" alias="likeDTO"/>
+		<typeAlias type="com.product.domain.BoardRankDTO" alias="boardRankDTO"/>
 		<typeAlias type="com.product.domain.ProductVO" alias="productVO"/>
+		<typeAlias type="com.member.domain.MemberVO" alias="memberVO"/>      
+		<typeAlias type="com.member.domain.CashFlowRecordVO" alias="cashFlowRecordVO"/>      
+		<typeAlias type="com.member.domain.AccountInfoVO" alias="accountInfoVO"/>		
+		<typeAlias type="com.artist.domain.ArtistVO" alias="artistVO"/>
 		<typeAlias type="com.product.domain.SellStatusVO" alias="SellStatusVO"/>
-		<typeAlias type="com.member.domain.MemberVO" alias="memberVO"/>
-		<typeAlias type="com.board.domain.InquiryVO" alias="InquiryVO"/>
+		<typeAlias type="com.product.domain.SellVO" alias="SellVO"/>
+		<typeAlias type="com.common.domain.MainVO" alias="MainVO"/>
 		<typeAlias type="com.admin.domain.ProductVO" alias="AproductVO"/>
-		
-		<!-- typeAlias type="com.product.domain.ProductDtlVO" alias="productDtlVO"/-->
+		<typeAlias type="com.board.domain.InquiryVO" alias="InquiryVO"/>
+		<typeAlias type="com.member.domain.WishListVO" alias="wishListVO"/>		
 		
 	</typeAliases>
+
+	
+
+
+
+
+
+
+
 
 </configuration>

@@ -144,7 +144,6 @@ public class MainController {
 		model.addAttribute("stat", result);
 		
 	}
-	
 	/* 상품 검색 */
 	@GetMapping("/search")
 	public String searchGoodsGET(Criteria cri, Model model) {

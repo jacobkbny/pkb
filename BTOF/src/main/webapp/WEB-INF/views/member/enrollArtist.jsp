@@ -6,14 +6,56 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
-	<link type="text/css" href="/resources/css/main.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="/resources/js/main.js" defer></script>
-	
+	<title>Enroll Artist</title>
+	<<!-- 네비css --><link rel="stylesheet" href="../resources/css/mypage/main.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>	
-			
+			<header class="p-3 mb-3 border-bottom">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+        </a>
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          
+          <li><a href="/common/main" class="nav-link px-2 text-secondary">BTO_FIRE!!</a></li>
+          <li><a href="/product/sell_list" class="nav-link px-2 text-black">MARKETPLACE</a></li>
+          <li><a href="/artist/artistPage" class="nav-link px-2 text-black">ARTIST</a></li>
+          <li><a href="/member/collection?prod_dtl_own=${nick}" class="nav-link px-2 text-black">MYNFT</a></li>
+          <li><a href="/artist/artistRanking" class="nav-link px-2 text-black">RANKING</a></li>
+          <li><a href="/board/notice" class="nav-link px-2 text-black">SUPPORT</a></li>
+        </ul>
+
+        
+
+        <div class="text-end">
+        	<c:if test="${sessionScope.memId != null}">
+        		<form action="/member/logout" method="post">
+        			<input type="submit" class="btn btn-light" value="로그아웃" />
+        		</form>
+        	<div align="right" display="inline">
+       			<button onclick="window.location='/buyAuction'">경매 참여</button>
+       			<button onclick="window.location='/member/mypage'">mypage</button>
+       			<button onclick="window.location='/member/cashIn'">balance</button>
+        	</div>
+        	</c:if>
+        	<c:if test="${sessionScope.memId == null}">
+        		<button type="button" class="btn btn-light" onclick="window.location='/common/login'">로그인</button>
+            <button type="button" class="btn btn-light" onclick="window.location='/common/signup'">회원가입</button>
+        	</c:if>
+        	
+            
+        </div>
+      </div>
+    </div>
+  </header>
 				
 
 	<!-- 상단 네비-->
@@ -39,6 +81,22 @@
 	        </section>
 	        <section id="main_right" class="main_inner">
 	-->        	
+			<c:if test="${sessionScope.memId == null}">
+				<script type="text/javascript">
+					alert("로그인후 이용 가능합니다.");
+					window.location="/common/login";
+				</script>
+			</c:if>
+	
+			<c:if test="${result == -1}">
+				<script type="text/javascript">
+					alert("이미 작가로 신청되셨습니다.");
+					history.go(-1);
+				</script>
+			</c:if>
+	
+		
+	
 	        	<h4 style="display: none;"><a href="">작가등록신청폼</a></h4>
 	        	<form action="/member/enrollArtistPro" method="post" enctype="multipart/form-data" name="enrollArtist" onsubmit="return check()">
 	        	<!--  어드민으로 보내기  -->
@@ -48,7 +106,7 @@
  				-->
 	        		등록할 작가명<br/>
 	        		<input type="text" name="artist_name" id="nick" width="250px"> 
-	        		<input type="text" name="check" id="check" readonly/>
+	        		<input type="text" name="check" id="check" disabled/>
 	        		<hr/>
 	        		<div class="formInnerWrap">
 						<div class="left item">

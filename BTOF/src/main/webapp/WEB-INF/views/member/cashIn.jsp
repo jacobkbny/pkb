@@ -9,6 +9,12 @@
 <title>Insert title here</title>
 </head>
 <body> 
+	<c:if test="${back == -1}">
+		<script type="text/javascript">
+			alert("현재 등록된 계좌가 없습니다. 계좌 등록을 먼저 진행해주세요");
+				history.go(-1);
+		</script>
+	</c:if>
 
 	<ul>
 		<li><a href="/common/main">BTO_FIRE!!</a></li>

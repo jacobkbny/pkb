@@ -12,7 +12,12 @@
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 </head>
 <body>
-
+	<c:if test="${sessionScope.memId == null}">
+				<script type="text/javascript">
+					alert("로그인후 이용 가능합니다.");
+					window.location="/common/login";
+				</script>
+			</c:if>
 		<table style="margin-top=100;" align="center">
 			<tr>
 					<td><h4> 지정가</h4></td>  <td>${list.prod_dtl_price}  KRW</td>

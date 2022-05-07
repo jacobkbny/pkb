@@ -9,5 +9,8 @@
   		insert into inquiry(id,head,content,inq_no) values(#{id},#{head},#{content},inq_seq.nextval) 
   	</insert>
   
+  	<select id="getUserInfo" resultType="MemberVO">
+  		select * from users where id=#{id}	
+  	</select>
   
   </mapper>

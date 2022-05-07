@@ -15,7 +15,6 @@
                 <c:if test="${sessionScope.memId == null}">
                        <li><a href="/product/sell_list">MARKETPLACE</a> |</li>
                      <li><a href="/artist/artistPage">ARTIST</a> |</li>
-                  
                      <li><a href="/artist/artistRanking">RANKING</a> |</li>
                      <li><a href="/board/notice">SUPPORT</a> </li>
             </c:if>        

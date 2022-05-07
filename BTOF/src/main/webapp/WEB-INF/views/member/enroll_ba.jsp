@@ -20,7 +20,7 @@
 				<br/><br/>
 		<div> 비밀번호 확인</div>
 			<input type="password" name="pwch" id="pwch"/>
-			<input type="submit" value="등록하기"/> 
+			<button type="submit"  id="enroll_ba" value="등록하기"> 등록하기</button> 
 		</form>
 			
 		<script type="text/javascript">
@@ -56,14 +56,19 @@
 							data : {Owner : OwnerVal ,ac_num :acNumVal},
 							success: function(result){
 								console.log("요청 성공!");
-								alert("등록이 가능한 계좌입니다.")
 								console.log("result : "+result);
 								$("#check_result").val(result);
+									let str = result;
+									if(str === "계좌 정보가 불일치 합니다. 다시 입력해주세요"){
+										$("#enroll_ba").prop("disabled",true);
+									}else{
+										$("#enroll_ba").prop("disabled",false);
+									}	
 							},
 							error : function(e){
 								console.log("에러발생");
-								alert("존재하지 않는 계좌입니다.")
-								console.log(e);
+								alert("존재하지 않는 계좌입니다.");
+								
 							}
 						});
 					});	

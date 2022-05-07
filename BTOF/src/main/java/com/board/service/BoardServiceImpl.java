@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.board.domain.InquiryVO;
 import com.board.mapper.BoardMapper;
+import com.member.domain.MemberVO;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -16,6 +17,12 @@ public class BoardServiceImpl implements BoardService {
 		public int addInq(InquiryVO vo) {
 			int result = boardMapper.addInq(vo);
 			return result;
+		}
+
+		@Override
+		public MemberVO getUserInfo(String id) {
+			MemberVO member = boardMapper.getUserInfo(id);
+			return member;
 		}
 
 	

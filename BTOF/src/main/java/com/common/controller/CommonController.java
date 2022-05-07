@@ -158,32 +158,32 @@ public class CommonController {
 	@PostMapping("login")
 	public String loginPro(String id , String pw,Model model,RedirectAttributes redirect, HttpSession session, HttpServletResponse response) {
 		int result = commonService.login(id, pw, response);
+			if(result == 0) {
+					model.addAttribute("result",result);
+					return "/common/login";
+			}
 		model.addAttribute("result",result);
 		model.addAttribute("id",id);
 		session.getAttribute("memId");
 			System.out.println("로그인후 세션에 저장된아이디 입니다."+session.getAttribute("memId"));
-		String power = commonService.getUserPower(id); // 아티스트인지 , 관리자 인지 구별하기 위해서
+		String power = commonService.getUserPower(id);// 관리자인지 아닌지 구별하기 위해서
 		if(power.equals("M")) {
-			redirect.addAttribute("result",result); // 1을 보내서 
 			return "redirect:/admin/main";
 		}
 		
 		String nick=memberService.getNick(id); // 아이디 주고 닉네임 받아오기
-			
-		String artist_pass =  commonService.getPass(nick); // 닉네임 줄테니까 , 아티스트 패스 가져와 
-			if(artist_pass== null) {
+		String artist_pass =commonService.getPass(nick); // 닉네임 줄테니까 , 아티스트 패스 가져와 
+			if(artist_pass==null|| artist_pass.equals("F")) {
 				return "redirect:/product/sell_list";
 			}else if(artist_pass.equals("D")) {
 					redirect.addAttribute("artist_pass",artist_pass);// 이거 받아서 승인 거절 되었으니까 다시 작가 신청 하라고 alert 띄우고 
 					// delete from artist where nick=#{nick}
 				commonService.deleteAp(nick); // 만약 승인 거절 당했으면 컬럼 삭제 하기
-				
 			}
 			//session.getId();
 		return "redirect:/product/sell_list";
 		
 	} 
-	
 	@GetMapping("findID")
 	public void findID() {
 		System.out.println("아이디 찾기 폼 요청");

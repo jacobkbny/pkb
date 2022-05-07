@@ -5,6 +5,7 @@ import java.util.List;
 import com.admin.domain.Criteria;
 import com.admin.domain.ProductVO;
 import com.board.domain.InquiryVO;
+import com.member.domain.ArtistVO;
 
 
 
@@ -34,5 +35,7 @@ public interface AdminMapper {
 		public int updateInq(InquiryVO vo);
 
 		public ProductVO bringPro(ProductVO product);
+
+		public List<ArtistVO> getArtistInfo();
 
 }
