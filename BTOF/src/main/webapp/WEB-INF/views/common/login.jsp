@@ -6,6 +6,31 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+   <style>
+      @media screen and (max-width: 765px) and (min-width: 300px){
+
+.table-container{
+	 width:100%;	
+	 overflow-x:auto;
+     white-space: nowrap;
+	}
+   
+ table{
+    width:auto;
+ } 
+ 
+ }
+    </style>
+
+
+
+
+
 </head>	
 <body>			
 			<c:if test="${sessionScope.memId != null}">
@@ -18,11 +43,6 @@
 
 
 		<c:if test="${sessionScope.memId == null}"> 
-		
-				
-				
-				
-				
 				<c:if test="${result ==0 }">
 				<script type="text/javascript">
 					alert("아이디 혹은 비밀번호가 틀렸습니다. 다시 입력해주세요");
@@ -36,6 +56,7 @@
 				</script>
 			</c:if>
 				
+		
 	<header class="p-3 mb-3 border-bottom">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -76,8 +97,6 @@
       </div>
     </div>
   </header>
-			
-			
 			
 			
 					<br/><br/><br/>

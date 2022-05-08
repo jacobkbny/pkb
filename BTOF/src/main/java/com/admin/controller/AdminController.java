@@ -20,6 +20,7 @@ import com.admin.domain.Criteria;
 import com.admin.domain.PageDTO;
 import com.admin.domain.ProductVO;
 import com.admin.service.AdminService;
+import com.artist.controller.ArtistController;
 import com.board.domain.InquiryVO;
 import com.member.controller.MemberController;
 import com.member.domain.ArtistVO;
@@ -40,6 +41,7 @@ public class AdminController {
 	
 	@GetMapping("main")
 	public void main( HttpSession session, Integer inq_result,Model model) {
+				System.out.println("admin 폼 요청 입니다!!");
 				String id = (String)session.getAttribute("memId");
 				MemberVO member = memberService.getMemberInfoForMypage(id);
 				System.out.println("관리자 로그인 입니다"+member.getPower());
@@ -54,6 +56,7 @@ public class AdminController {
 		model.addAttribute("list", adminService.getList(cri));
 			
 		List<ArtistVO> artist_list = adminService.getArtistInfo();
+			model.addAttribute("artist_list",artist_list);
 			System.out.println("아티스트 패스가 F인 아티스트 리스트 입니다"+artist_list);
 	}
 	@GetMapping("ready")
@@ -84,9 +87,37 @@ public class AdminController {
 	public String readyPro2(ProductVO product, HttpSession session, Model model) {
 		int result = adminService.updateRefues(product);
 		model.addAttribute("product",result);
-		
+				
 		return "redirect:/admin/Approval";
 	}
+	
+	//작가 심사 넘어오는곳 
+	@GetMapping("artist_check")
+	public void artist_check(ArtistVO artist,Model model) {
+			System.out.println("아티스트 심사 페이지 요청 입니다"+artist);
+		
+			artist =adminService.getArtistDetail(artist);
+			model.addAttribute("artist",artist);
+				
+		
+	}
+	// 작가 승인 거절 넘어오는곳
+		@GetMapping("artist_result")
+		public void artist_result(int result,ArtistVO artist,Model model) {
+			
+			if(result == 1) {
+				System.out.println("작가 승인 신청 넘어왔습니다"+result);
+				adminService.acceptArtist(artist); // D로 바꿈 
+					
+			}
+			else {
+					System.out.println("작가 거절 신청 넣었습니다"+result);
+					adminService.declineArtist(artist); // D 로 바꿈	
+					}
+			
+			model.addAttribute("result",result);
+		}
+	
 		
 	@GetMapping("Manage")
 	

@@ -120,9 +120,15 @@
 	<br />
 	
 	<hr/>
- 			<h3> 작가 등록 신청 </h3>
- 			
- 			
+	
+				<h3> 작가 등록 신청 </h3>
+ 				<c:forEach var ="artist" items="${artist_list}">
+ 				<a href="/admin/artist_check?artist_name=${artist.artist_name}&artist_nick=${artist.artist_nick}">
+ 						아이디 : ${artist.artist_name} 
+ 					작가 활동명 : ${artist.artist_nick}
+ 				</a>	
+ 				</c:forEach>
+				
 	
 	
 	

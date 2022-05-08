@@ -39,6 +39,12 @@ public interface AdminService {
 
 	public List<ArtistVO> getArtistInfo();
 
+	public ArtistVO getArtistDetail(ArtistVO artist);
+
+	public void acceptArtist(ArtistVO artist);
+
+	public void declineArtist(ArtistVO artist);
+
 	
 
 	

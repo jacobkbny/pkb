@@ -42,5 +42,15 @@
   		select prod_name,prod_artist,prod_price,prod_div from product where prod_no=#{prod_no}
   	</select>
   	
+  	<select id="getArtistDetail" resultType="com.member.domain.ArtistVO">
+  	
+  		select * from artist where artist_name=#{artist_name}
+  	</select>
+  		<update id="acceptArtist">
+  			update artist set artist_pass ='T' where artist_name=#{artist_name}
+  		</update>
+  		<update id="declineArtist">
+  			update artist set artist_pass ='D' where artist_name=#{artist_name}
+  		</update>  		
   		
   </mapper>

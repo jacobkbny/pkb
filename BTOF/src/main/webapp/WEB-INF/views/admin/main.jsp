@@ -68,7 +68,7 @@
 
 
 <body>
-		<c:if test="${member.power != M}">
+		<c:if test="${member.power != 'M'}">
 			<script type="text/javascript">
 				alert("잘못된 접근입니다.${member.power}");			
 				window.location="/product/sell_list";

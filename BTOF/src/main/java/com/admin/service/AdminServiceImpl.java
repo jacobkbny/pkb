@@ -114,4 +114,22 @@ public class AdminServiceImpl implements AdminService {
 		List<ArtistVO> artist_list = adminMapper.getArtistInfo();  
 		return artist_list;
 	}
+
+	@Override
+	public ArtistVO getArtistDetail(ArtistVO artist) {
+		artist = adminMapper.getArtistDetail(artist);
+		return artist;
+	}
+
+	@Override
+	public void acceptArtist(ArtistVO artist) {
+			adminMapper.acceptArtist(artist);
+		
+	}
+
+	@Override
+	public void declineArtist(ArtistVO artist) {
+		adminMapper.declineArtist(artist);
+		
+	}
 }
