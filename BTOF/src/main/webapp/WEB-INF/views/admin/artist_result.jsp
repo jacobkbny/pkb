@@ -20,6 +20,5 @@
 			window.location="/admin/main";
 		</script>
 	</c:if>
-
 </body>
 </html>

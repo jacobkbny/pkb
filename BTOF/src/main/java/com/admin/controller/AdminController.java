@@ -48,9 +48,6 @@ public class AdminController {
 				model.addAttribute("member",member);
 				model.addAttribute("inq_result",inq_result);
 	}
-	
-	
-	
 	@GetMapping("Approval")
 	public void Approval(HttpServletRequest request, Criteria cri, Model model) {
 		model.addAttribute("list", adminService.getList(cri));
@@ -90,7 +87,6 @@ public class AdminController {
 				
 		return "redirect:/admin/Approval";
 	}
-	
 	//작가 심사 넘어오는곳 
 	@GetMapping("artist_check")
 	public void artist_check(ArtistVO artist,Model model) {
@@ -98,35 +94,25 @@ public class AdminController {
 		
 			artist =adminService.getArtistDetail(artist);
 			model.addAttribute("artist",artist);
-				
-		
 	}
 	// 작가 승인 거절 넘어오는곳
 		@GetMapping("artist_result")
 		public void artist_result(int result,ArtistVO artist,Model model) {
-			
 			if(result == 1) {
 				System.out.println("작가 승인 신청 넘어왔습니다"+result);
 				adminService.acceptArtist(artist); // D로 바꿈 
-					
 			}
 			else {
 					System.out.println("작가 거절 신청 넣었습니다"+result);
 					adminService.declineArtist(artist); // D 로 바꿈	
 					}
-			
 			model.addAttribute("result",result);
-		}
-	
-		
+			}
 	@GetMapping("Manage")
-	
 	public void manage(Model model) {
 		System.out.println("manage 폼 요청");
 		InquiryVO vo = new InquiryVO();
-			
 		List<InquiryVO> list = adminService.getInqList();
-		
 		model.addAttribute("list",list);
 		
 	}

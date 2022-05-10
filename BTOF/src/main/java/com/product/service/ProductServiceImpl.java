@@ -21,12 +21,8 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public ProductVO get(int prod_no) {
 			ProductVO product=productMapper.read(prod_no);
-			
-			
 				return product;
 	}
-	
-
 	@Override
 	public List<ProductVO> getList(Criteria cri) {
 		System.out.println(cri);

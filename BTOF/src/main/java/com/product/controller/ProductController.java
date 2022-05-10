@@ -74,15 +74,10 @@ public class ProductController {
 				model.addAttribute("ownResult",result);
 				model.addAttribute("product",product2);
 //			String idUser = productService.getIdUser(id);
-				
 //			System.out.println(idUser+"    "+owner);
-			
-			
-			
-			
 //		model.addAttribute("ownResult", result);
 		//int prod_dtl_no=prod_no;
-		model.addAttribute("product", productService.get(product.getProd_no()));
+		//model.addAttribute("product", productService.get(product.getProd_no()));
 		
 		//model.addAttribute("product_dtl", productService.getDtl(prod_dtl_no));
 	}
