@@ -58,14 +58,12 @@ public class AdminController {
 	}
 	@GetMapping("ready")
 	public void ready(@RequestParam("prod_no") int prod_no, @ModelAttribute("cri")Criteria cri, Model model,HttpSession session) {
-		
 			model.addAttribute("product", adminService.get(prod_no));
 	}
 	
 	//승인처리
 	@PostMapping("readyPro")
 	public String readyPro(ProductVO product, HttpSession session,Model model,RedirectAttributes rttr) {
-			int prod_number = product.getProd_no(); // 상품 번호 저장하고
 		model.addAttribute("product",adminService.updatePass(product)); //업데이트 쿼리문 날려주고
 		// 제품 번호가 넘어 오니까 제품 번호를 통해서 작품명이랑 작가명 가격 분할갯수
 			product = adminService.bringPro(product);
@@ -96,16 +94,16 @@ public class AdminController {
 			model.addAttribute("artist",artist);
 	}
 	// 작가 승인 거절 넘어오는곳
-		@GetMapping("artist_result")
-		public void artist_result(int result,ArtistVO artist,Model model) {
-			if(result == 1) {
-				System.out.println("작가 승인 신청 넘어왔습니다"+result);
-				adminService.acceptArtist(artist); // D로 바꿈 
+	@GetMapping("artist_result")
+	public void artist_result(int result,ArtistVO artist,Model model) {
+		if(result == 1) {
+			System.out.println("작가 승인 신청 넘어왔습니다"+result);
+			adminService.acceptArtist(artist); // D로 바꿈 
 			}
 			else {
 					System.out.println("작가 거절 신청 넣었습니다"+result);
 					adminService.declineArtist(artist); // D 로 바꿈	
-					}
+				}
 			model.addAttribute("result",result);
 			}
 	@GetMapping("Manage")

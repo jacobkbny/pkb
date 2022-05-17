@@ -72,7 +72,7 @@
 	
 	<!-- 오너 가져오기 -->
 	<select id="getOwner" resultType="String">
-		select prod_dtl_own from product_dtl where prod_dtl_no=#{prod_no}
+		select prod_dtl_own from test_dtl2 where prod_dtl_no=#{prod_no}
 	</select>
 	
 	<!-- 로그인한 아이디로 닉네임 가져오기 -->
@@ -121,9 +121,10 @@
 				insert into history(name,seller,buyer_name,paid_amount,buyer_tel)values(#{name},#{seller},#{buyer_name},#{paid_amount},#{buyer_tel})
 			</insert>
 			<select id="getOwners" resultType="SellStatusVO">
-			
-			select prod_dtl_owner from test_dtl2 where prod_dtl_name=#{prod_name} and prod_dtl_artist=#{prod_artist}
-			
+			select b.* from (select rownum r, a.* from (select * from test_dtl2 where prod_dtl_artist=#{prod_artist} and prod_dtl_name =#{prod_name} order by prod_dtl_registday asc) a ) b;
+			</select>
+			<select id="getProd_info" resultType="productVO">
+				select * from product where prod_name = #{prod_name} and prod_artist=#{prod_artist}
 			</select>
 			
 </mapper>

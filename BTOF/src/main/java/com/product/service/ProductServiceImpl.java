@@ -158,6 +158,11 @@ public class ProductServiceImpl implements ProductService{
 		
 		return owners;
 	}
+	@Override
+	public ProductVO getProd_info(String prod_name, String prod_artist) {
+		ProductVO product = productMapper.getProd_info(prod_name,prod_artist);
+		return product;
+	}
 
 
 

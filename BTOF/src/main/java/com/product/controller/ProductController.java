@@ -4,6 +4,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -64,14 +65,6 @@ public class ProductController {
 					ProductVO product2 = new ProductVO(); // 상품 번호 주고 가져온 새로운 정보들을 여기에 담기	
 					product2 = productService.get(prod_no); // 여기에 상품 모든 정보가 들어있음
 			List<String> owners = productService.getOwners(product); // 넘어온 작가와 작품명을 주고 모든 소유자들을 뽑기
-			System.out.println("작품의 소유자들 입니다"+ owners);
-				int result = -1;
-				if(owners.contains(id)) {
-						result = 1; // 작가와 작품명으 주고 소유주들을 들고와서 list에 담고 그 안에 이사람이 있는지 확인 
-				}else {
-					result = 0;
-				}
-				model.addAttribute("ownResult",result);
 				model.addAttribute("product",product2);
 //			String idUser = productService.getIdUser(id);
 //			System.out.println(idUser+"    "+owner);
@@ -100,9 +93,8 @@ public class ProductController {
 		model.addAttribute("artistProdList", productService.getArtistProdList(cri));
 		
 	}
-	
 	@GetMapping("buy")
-	public String buy(SellStatusVO vo,Model model) {
+	public String buy(SellStatusVO vo,Model model,HttpSession session) {
 			// select count(prod_dtl_sales='T') from test_dtl2; 
 			System.out.println("prod_name:"+vo.getProd_name());
 				model.addAttribute("prod_name",vo.getProd_name());
@@ -110,6 +102,7 @@ public class ProductController {
 				model.addAttribute("prod_artist",vo.getProd_artist());
 			System.out.println("prod_div:"+vo.getProd_div());
 				model.addAttribute("prod_div",vo.getProd_div());
+					String id =(String) session.getAttribute("memId");
 							// 필요한거 작가명, 작품명 r
 					String artist = vo.getProd_artist();
 					String prod_name = vo.getProd_name();
@@ -119,7 +112,8 @@ public class ProductController {
 				List<SellStatusVO> list = productService.getSellList(vo);
 					System.out.println("list 입니다.------------"+list);
 					System.out.println("list ------"+list);
-					//시리얼넘버 , 가격 , 판매자 
+					//시리얼넘버 , 가격 , 판매자
+					model.addAttribute("id",id);
 					model.addAttribute("list",list);
 					return "/product/buy";
 			
@@ -205,7 +199,6 @@ public class ProductController {
 			model.addAttribute("list",vo);
 			//밸런스 가져오는 쿼리문 작성해서 모델에 보내주기 
 	}
-	
 	@GetMapping("balancePay")
 	public void balancePay( SellStatusVO vo,HttpSession session,Model model) {
 			String id = (String)session.getAttribute("memId");
@@ -219,7 +212,47 @@ public class ProductController {
 					model.addAttribute("result",result);
 			System.out.println("id는 ----------------"+id);
 			System.out.println("vo는 -----------" +vo);
+	}
+	
+	@GetMapping("Product_sell")
+	public void Product_sell(SellStatusVO vo,Model model) {
+			System.out.println("소유자의 판매 요청으로 인한 판매 등록 페이지 응답");
+			
+			//r 넘어오고 작품명 작가명 넘어와야함
+					
+			// jsp에 보내줄것 prod_tag , prod_file ,prod_name , prod_artist
+			
+			// select * from product where prod_name = #{prod_name} and prod_artist=#{prod_artist}
+			String prod_name = vo.getProd_dtl_name();
+			String prod_artist=vo.getProd_dtl_artist();
 				
+			ProductVO product = new ProductVO();
+						// 모든 정보를 가져옴
+				product = productService.getProd_info(prod_name,prod_artist);
+			
+				model.addAttribute("product",product);
+					//몇번쨰 작품인지 알려줌
+				model.addAttribute("r",vo.getR()); 
+	}
+		//지정가 판매 (r ,작품명, 작가명)  
+	@GetMapping("Fixsell")
+	public void Fixsell(SellStatusVO vo) {
+			// 작품 사진 | 동영상 | 오디오 띄우고
+			// 작품 제목
+			// 창작자 
+			// 희망 가격 받고
+			// 확인버튼
+		
+	}
+		//입찰 판매 (r, 작품명 , 작가명)
+	@GetMapping("Asksell")
+	public void Asksell(SellStatusVO vo) {
+		// 작품 사진 | 동영상 | 오디오 띄우고
+		// 작품 제목
+		// 창작자 
+		// 입찰 마감 시간 받고
+		// 입찰 시작 가격 적고
+		// 확인버튼
 	}
 	
 }

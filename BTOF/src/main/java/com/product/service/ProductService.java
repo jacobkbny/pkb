@@ -58,6 +58,8 @@ public interface ProductService {
 
 		public List<String> getOwners(ProductVO product);
 
+		public ProductVO getProd_info(String prod_name, String prod_artist);
+
 		
 		
 	

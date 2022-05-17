@@ -11,6 +11,7 @@ public class SellStatusVO {
 	private String prod_name;
 	private String prod_artist;
 	private String prod_div;
+	private String prod_tag;
 	private String prod_file;
 	private String prod_dtl_sn;
 	private int piece;

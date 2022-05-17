@@ -33,9 +33,16 @@
 		<table> 
 	<c:forEach var ="sellStatusVO" items="${list}"> <!--  지정가 판매인지 , 입찰 판매인지-->
 		<tr>
+			<c:if test="${sellStatusvo.prod_dtl_owner == id}">
+				<td>${sellStatusVO.r} </td>
+				<td><input type="text" value="소유중" disabled/></td>
+				<td><button type="button" onclick="window.location='/product/Product_sell?r=${sellStatusVO.r}&prod_dtl_artist=${sellStatusVO.prod_dtl_artist}&prod_dtl_name=${sellStatusVO.prod_dtl_name}'">판매하기</button></td>
+				</c:if>
+				</tr>
+		<tr>
 			<c:if test="${sellStatusVO.prod_dtl_bid =='T'}"> <!-- 입찰가 구매 버튼 -->
-			<td>${sellStatusVO.r} </td>
-			<td><input type="text" value="입찰" disabled/></td>
+				<td>${sellStatusVO.r} </td>
+				<td><input type="text" value="입찰" disabled/></td>
 			 <td> ${sellStatusVO.prod_dtl_bid_price}</td><td>${sellStatusVO.prod_dtl_owner}</td> 
 			<td><button type="button" onclick="window.location='/product/Bidbuy?prod_dtl_no=${sellStatusVO.prod_dtl_no}'">입찰</button></td>
 		</c:if>

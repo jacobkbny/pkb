@@ -1,29 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>sell</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-	
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
-
-		<!-- 네비css --><link rel="stylesheet" href="../resources/css/mypage/main.css">
+<meta charset="UTF-8">
+<title>제품 판매 등록</title>
+<!-- 네비css --><link rel="stylesheet" href="../resources/css/mypage/main.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
-
-
 <body>
+							
 	<header class="p-3 mb-3 border-bottom">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -58,15 +51,11 @@
         		<button type="button" class="btn btn-light" onclick="window.location='/common/login'">로그인</button>
             <button type="button" class="btn btn-light" onclick="window.location='/common/signup'">회원가입</button>
         	</c:if>
-        	
-            
         </div>
       </div>
     </div>
   </header>
-		
-
-	<h1 align="center">SELL</h1>
+			<h1 align="center">SELL</h1>
 	<table width="700" align="center">
 		<tr>
 			<td rowspan="3">
@@ -104,7 +93,8 @@
 			<!--	<h3>가격 : ${product.prod_dtl_price}</h3>-->
 					
 					
-					<input type="button" value="선택 및 구매하기" onclick="openBuy()"/> <!-- 판매 연결 -->
+					<input  type="button" value="지정가 판매" onclick="openFix()"/> <!--지정가 판매 연결 -->
+					<input  type="button" value="입찰 판매" onclick="openAsk()"/> <!-- 입찰 판매 연결 -->
 				
 				<h4>창작자 : ${product.prod_artist}</h4>
 			</td>
@@ -113,7 +103,6 @@
 			<td>
 				<h2>작품상세</h2>
 				 ${product.prod_descr} <br />
-				
 				<br />
 				<button type="button" class="btn btn-secondary" onclick="window.location='/product/artistProd?prod_artist=${product.prod_artist}'"> 작가의 다른 작품 보기 </button> <!-- 작가페이지연결 -->
 			</td>
@@ -132,18 +121,18 @@
 			</td>
 		</tr>
 	</table>
-	
-		<script type="text/javascript">
-		var popupX = (window.screen.width / 2) - (200 / 2);
-		var popupY= (window.screen.height /2) - (300 / 2);
-			function openBuy(){
-				let url="/product/buy?prod_name=${product.prod_name}&prod_artist=${product.prod_artist}&prod_div=${product.prod_div}";
-				open(url,"buy", 'status=no, height=700, width=600, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
-			}
-		</script>
-	
-	
-	
-	
 </body>
+	<script type="text/javascript">
+	var popupX = (window.screen.width / 2) - (200 / 2);
+	var popupY= (window.screen.height /2) - (300 / 2);
+	function openFix(){
+		let url="/product/Fixsell?prod_name=${product.prod_name}&prod_artist=${product.prod_artist}&r=${r}";
+		open(url,"Fixsell", 'status=no, height=700, width=600, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
+	}
+	function openAsk(){
+		let url="/product/Asksell?prod_name=${product.prod_name}&prod_artist=${product.prod_artist}&r=${r}";
+		open(url,"Asksell", 'status=no, height=700, width=600, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
+	}
+	
+	</script>
 </html>

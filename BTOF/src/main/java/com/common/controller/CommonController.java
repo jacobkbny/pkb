@@ -157,6 +157,7 @@ public class CommonController {
 		
 	@PostMapping("login")
 	public String loginPro(String id , String pw,Model model,RedirectAttributes redirect, HttpSession session, HttpServletResponse response) {
+				id = id.toLowerCase(); // 대소문자 구문 안하게 하기 위해서
 		int result = commonService.login(id, pw, response);
 			if(result == 0) {
 					model.addAttribute("result",result);

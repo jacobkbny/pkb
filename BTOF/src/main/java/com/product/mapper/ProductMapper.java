@@ -69,6 +69,8 @@ public interface ProductMapper {
 	public int insHistory(PayInfoVO info);
 
 	public List<String> getOwners(ProductVO product);
+
+	public ProductVO getProd_info(@Param("prod_name") String prod_name,@Param("prod_artist") String prod_artist);
 	
 	
 }
