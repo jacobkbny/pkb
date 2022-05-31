@@ -213,7 +213,6 @@ public class ProductController {
 			System.out.println("id는 ----------------"+id);
 			System.out.println("vo는 -----------" +vo);
 	}
-	
 	@GetMapping("Product_sell")
 	public void Product_sell(SellStatusVO vo,Model model) {
 			System.out.println("소유자의 판매 요청으로 인한 판매 등록 페이지 응답");
@@ -225,11 +224,9 @@ public class ProductController {
 			// select * from product where prod_name = #{prod_name} and prod_artist=#{prod_artist}
 			String prod_name = vo.getProd_dtl_name();
 			String prod_artist=vo.getProd_dtl_artist();
-				
 			ProductVO product = new ProductVO();
 						// 모든 정보를 가져옴
 				product = productService.getProd_info(prod_name,prod_artist);
-			
 				model.addAttribute("product",product);
 					//몇번쨰 작품인지 알려줌
 				model.addAttribute("r",vo.getR()); 
@@ -242,7 +239,6 @@ public class ProductController {
 			// 창작자 
 			// 희망 가격 받고
 			// 확인버튼
-		
 	}
 		//입찰 판매 (r, 작품명 , 작가명)
 	@GetMapping("Asksell")
